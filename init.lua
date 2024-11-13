@@ -258,6 +258,9 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
   { 'nvim-tree/nvim-tree.lua', opts = {} },
+<<<<<<< HEAD
+>>>>>>> 88bddc3 (update configs with personal preferences)
+=======
 >>>>>>> 88bddc3 (update configs with personal preferences)
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
