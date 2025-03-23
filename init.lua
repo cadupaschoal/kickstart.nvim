@@ -90,8 +90,11 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Set cursor block [PERSONAL]
+vim.opt.guicursor = 'n-v-i-c:block'
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -102,7 +105,7 @@ vim.g.have_nerd_font = false
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -188,6 +191,10 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- Shortcuts [PERSONAL]
+vim.keymap.set('n', '<leader>n', '<cmd>:tabe<CR>', { desc = 'Create new tab' })
+vim.keymap.set('n', '<leader>e', '<cmd>:Ex<CR>', { desc = 'Exit file' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -668,7 +675,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
+        ts_ls = {},
         --
 
         lua_ls = {
@@ -883,26 +890,32 @@ require('lazy').setup({
       }
     end,
   },
-
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
+    -- 'folke/tokyonight.nvim', -- (tokyonight-storm, tokyonight-moon, tokyonight-day)
+    --'AlexvZyl/nordic.nvim', --(nordic)
+    --'rebelot/kanagawa.nvim', -- (kanagawa-wave, kanagawa-dragon, kanagawa-lotus)
+    --'rose-pine/neovim', --(rose-pine, rose-pine-moon)
+    --'nyoom-engineering/oxocarbon.nvim',
+    'ellisonleao/gruvbox.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
       ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
+      require('gruvbox').setup {
         styles = {
           comments = { italic = false }, -- Disable italics in comments
         },
+        terminal_colors = true,
+        contrast = 'hard',
+        transparent_mode = true,
       }
 
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'gruvbox'
     end,
   },
 
