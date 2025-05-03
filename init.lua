@@ -90,8 +90,19 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Set cursor block [PERSONAL]
-vim.opt.guicursor = 'n-v-i-c:block'
+--  NOTE: [PERSONAL]
+vim.opt.guicursor = 'n-v-i-c:block' --set cursor block
+vim.opt.textwidth = 0
+vim.opt.wrapmargin = 1
+vim.opt.linebreak = true --break the line by word
+vim.api.nvim_create_autocmd('Filetype', {
+  pattern = '*',
+  callback = function()
+    vim.opt_local.formatoptions:remove { 'r', 'o' } --remove autocomment after use enter on insert mode
+    vim.opt_local.formatoptions:append 't' --break lines automatically when the line reach the end of the screen
+  end,
+})
+-- [END PERSONAL]
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
@@ -900,13 +911,17 @@ require('lazy').setup({
     --'rebelot/kanagawa.nvim', -- (kanagawa-wave, kanagawa-dragon, kanagawa-lotus)
     --'rose-pine/neovim', --(rose-pine, rose-pine-moon)
     --'nyoom-engineering/oxocarbon.nvim',
-    'ellisonleao/gruvbox.nvim',
+    --'ellisonleao/gruvbox.nvim', --(gruvbox)
+    --'EdenEast/nightfox.nvim', --(carbonfox)
+    'miikanissi/modus-themes.nvim', --(modus_vivendi)
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
       ---@diagnostic disable-next-line: missing-fields
-      require('gruvbox').setup {
+      require('modus-themes').setup {
+        --style = 'auto',
+        --variant = 'default',
         styles = {
-          comments = { italic = false }, -- Disable italics in comments
+          comments = { italic = true }, -- Disable italics in comments
         },
         terminal_colors = true,
         contrast = 'hard',
@@ -915,7 +930,7 @@ require('lazy').setup({
 
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
-      vim.cmd.colorscheme 'gruvbox'
+      vim.cmd.colorscheme 'modus_vivendi'
     end,
   },
 
